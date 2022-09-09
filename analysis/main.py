@@ -10,15 +10,19 @@ def get_data(data_path):
     with open(data_path) as f:
         return json.load(f)
 
+
 def get_file_with_postfix(files, p):
-    return list(filter(lambda n: n[len(n)-len(p):]==p, files))[0]
-    
+    return list(filter(lambda n: n[len(n) - len(p) :] == p, files))[0]
+
 
 test_path = "analysis/test.wav"
+
+
 def convert_ogg_to_wav(ogg_path):
     song = AudioSegment.from_ogg(ogg_path)
     song.export(test_path, format="wav")
-    
+
+
 levels = os.listdir("levels/")
 print()
 for index, level in enumerate(levels):
@@ -41,15 +45,7 @@ song_map = get_data(os.path.join(choice_path, map_file))
 
 notes = song_map["_notes"]
 print(len(notes))
-points = [note["_time"]*60*RATE//BPM for note in notes]
-
-
-
-
-
-
-
-
+points = [note["_time"] * 60 * RATE // BPM for note in notes]
 
 
 f = plt.figure()
@@ -57,9 +53,10 @@ f.set_figwidth(16)
 f.set_figheight(6)
 
 # plt.subplot(1, 2, 1) # row 1, col 2 index 1
-plt.plot(data[:len(data)//10,0])
-for point in points[:len(points)//10]:
-    plt.plot(point, 0, 'ro')
+ratio = 1
+plt.plot(data[: len(data), 0])
+for point in points[: len(points)]:
+    plt.plot(point, 0, "ro")
 plt.xlabel("Sample Index")
 plt.ylabel("Amplitude")
 plt.title("LEFT")
@@ -71,7 +68,4 @@ plt.title("LEFT")
 # plt.title("RIGHT")
 
 
-
 plt.show()
-
-
