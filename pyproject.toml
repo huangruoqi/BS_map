@@ -5,7 +5,10 @@ description = "map generator for beat saber"
 authors = ["Ruoqi Huang <huangruoqi374@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.9"
+pydub = "^0.25.1"
+scipy = "^1.9.1"
+matplotlib = "^3.5.3"
 
 [tool.poetry.dev-dependencies]
 

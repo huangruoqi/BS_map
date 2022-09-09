@@ -3,5 +3,5 @@ setup:
 	poetry install
 
 test:
-	poetry run ./analysis/main.py 
+	poetry run python ./analysis/main.py 
 
