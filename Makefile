@@ -1,15 +1,5 @@
 .PHONY: build shell start stop clean test black run
 export PYTHONDONTWRITEBYTECODE=1
-run:
-	poetry run python ./analysis/main.py 
-
-test:
-	poetry run pytest ./test
-
-black:
-	poetry run black ./analysis/
-	poetry run black ./test/
-
 
 
 NAME=bs_map
@@ -34,10 +24,14 @@ else
 shell: start
 endif
 
+ifeq ($(IS_CONTAINER), 2)
+clean:
+	@docker rm $(NAME)
+endif
 
 build: 
-	@docker build -t docker-practice .
-	@docker run -dt --name $(NAME) docker-practice
+	@docker build -t bs_map_docker .
+	@docker run -dt --name $(NAME) bs_map_docker
 
 shell:
 	@docker exec -it $(NAME) bash
@@ -49,7 +43,13 @@ start:
 stop:
 	@docker stop $(NAME)
 
-ifeq ($(IS_CONTAINER), 2)
-clean:
-	@docker rm $(NAME)
-endif
+
+run:
+	poetry run python ./analysis/main.py 
+
+test:
+	poetry run pytest ./test
+
+black:
+	poetry run black ./analysis/
+	poetry run black ./test/
