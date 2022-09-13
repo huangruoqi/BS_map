@@ -31,7 +31,7 @@ choice = levels[int(input("Please choose one song to analyze: "))]
 choice_path = os.path.join("levels/", choice)
 files = os.listdir(choice_path)
 song_file = get_file_with_postfix(files, "gg")
-# convert_ogg_to_wav(os.path.join(choice_path, song_file))
+convert_ogg_to_wav(os.path.join(choice_path, song_file))
 
 RATE, data = read(test_path)
 
