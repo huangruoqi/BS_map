@@ -21,7 +21,7 @@ clean:
 	@docker rm $(NAME) > /dev/null
 endif
 
-start shell black run test: build
+start black run test: build
 build: 
 	@docker image rm bs_map_docker > /dev/null
 	@docker build -t bs_map_docker . &> /dev/null
